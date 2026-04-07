@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}Calangos NET{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'cadastro/style.css' %}">
+</head>
+<body>
+
+    <nav>
+        <a href="{% url 'index' %}">Início</a> |
+        <a href="{% url 'contato' %}">Contato</a> |
+        <a href="{% url 'adicionar' %}">Adicionar</a> |
+        {% if user.is_authenticated %}
+            <span style="color: gold;">Olá, {{ user.username }}!</span> |
+            <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Sair</button>
+            </form>
+        {% else %}
+        <a href="{% url 'login' %}">Entrar</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <hr>
+    <footer>
+        <p>&copy; 2026 {{ nome | default:"Julimar Lemos" }}</p>
+    </footer>
+
+</body>
+</html>

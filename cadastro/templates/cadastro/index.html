@@ -1,0 +1,17 @@
+{% extends 'cadastro/base.html' %}
+
+{% block titulo %}Início{% endblock %}
+
+{% block conteudo %}
+    <h1>Pessoas Cadastradas</h1>
+    <ul>
+        {% for pessoa in pessoas %}
+            <li>
+                <a href="{% url 'detalhe' id=pessoa.id %}">{{ pessoa.nome }}</a>
+                — {{ pessoa.email }} — {{ pessoa.idade }} anos
+            </li>
+        {% empty %}
+            <li>Nenhuma pessoa cadastrada ainda.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
