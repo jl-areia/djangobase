@@ -3,6 +3,7 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background: linear-gradient(to bottom, #f0f8ff, #e6e6fa);
 }
 
 nav {
@@ -44,4 +45,36 @@ button {
     padding: 10px;
     border-radius: 4px;
     list-style: none;
+}
+
+/* Adicionando mais cores */
+h2, h3 {
+    color: #4b0082;
+}
+
+a:hover {
+    color: #ff6347;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input[type="text"], input[type="email"], textarea {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: #4b0082;
+    outline: none;
 }
