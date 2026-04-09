@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="hero-panel">
+    <div class="hero-copy">
+        <p class="eyebrow">Bem-vindo</p>
+        <h1>Uma experiência futurista em Django</h1>
+        <p>Um projeto pessoal com foco em design moderno, estrutura limpa e funcionalidades dinâmicas.</p>
+        <div class="hero-actions">
+            <a class="button button-primary" href="{% url 'blog' %}">Ver postagens</a>
+            <a class="button button-ghost" href="{% url 'contato' %}">Entrar em contato</a>
+        </div>
+    </div>
+    <aside class="hero-stats">
+        <article>
+            <strong>{{ posts|length }}</strong>
+            <span>postagens recentes</span>
+        </article>
+        <article>
+            <strong>3</strong>
+            <span>seções modernas</span>
+        </article>
+        <article>
+            <strong>100%</strong>
+            <span>layout responsivo</span>
+        </article>
+    </aside>
+</section>
+
+<section class="preview-panel">
+    <div class="section-header">
+        <p class="eyebrow">Últimas publicações</p>
+        <h2>Conteúdo criado para testar o blog</h2>
+    </div>
+    <div class="cards-grid">
+        {% for post in posts %}
+            <article class="card">
+                <div class="card-head">
+                    <h3><a href="{{ post.get_absolute_url }}">{{ post.titulo }}</a></h3>
+                    <span>{{ post.criado_em|date:'d/m/Y' }}</span>
+                </div>
+                <p>{{ post.resumo|default:post.conteudo|truncatechars:120 }}</p>
+                <a href="{{ post.get_absolute_url }}" class="button button-ghost">Ler mais</a>
+            </article>
+        {% empty %}
+            <p class="empty-state">Nenhuma postagem publicada ainda.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

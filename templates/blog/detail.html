@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.titulo }} - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel">
+    <div class="section-header">
+        <p class="eyebrow">Artigo</p>
+        <h2>{{ post.titulo }}</h2>
+        <span class="post-meta">Publicado em {{ post.criado_em|date:'d/m/Y H:i' }}</span>
+    </div>
+
+    <div class="content-card">
+        <p>{{ post.conteudo }}</p>
+    </div>
+    <a href="{% url 'blog' %}" class="button button-ghost">Voltar ao blog</a>
+</section>
+{% endblock %}

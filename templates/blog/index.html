@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel">
+    <div class="section-header">
+        <p class="eyebrow">Blog</p>
+        <h2>Publicações mais recentes</h2>
+    </div>
+
+    <div class="cards-grid">
+        {% for post in posts %}
+            <article class="card">
+                <div class="card-head">
+                    <h3><a href="{{ post.get_absolute_url }}">{{ post.titulo }}</a></h3>
+                    <span>{{ post.criado_em|date:'d/m/Y' }}</span>
+                </div>
+                <p>{{ post.resumo|default:post.conteudo|truncatechars:140 }}</p>
+                <a class="button button-ghost" href="{{ post.get_absolute_url }}">Ler artigo</a>
+            </article>
+        {% empty %}
+            <p class="empty-state">Nenhuma postagem disponível no momento.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
