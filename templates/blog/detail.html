@@ -13,6 +13,11 @@
 
     <div class="detail-grid">
         <div class="content-card">
+            {% if user.is_authenticated and post.autor == user or user.is_superuser %}
+                <div class="content-actions">
+                    <a href="{% url 'editar_post' pk=post.pk %}" class="button button-ghost">Editar postagem</a>
+                </div>
+            {% endif %}
             {% if post.video_url %}
                 <div class="post-media">
                     {% if 'youtube.com' in post.video_url or 'youtu.be' in post.video_url %}

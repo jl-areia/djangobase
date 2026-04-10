@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Postagem - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel auth-panel">
+    <div class="section-header">
+        <p class="eyebrow">Editar Postagem</p>
+        <h2>Atualize seu conteúdo</h2>
+        <p>Edite o título, a categoria, as tags e a mídia do seu post.</p>
+    </div>
+
+    <div class="auth-card profile-card">
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-grid">
+                <div class="form-field">{{ form.titulo.label_tag }}{{ form.titulo }}</div>
+                <div class="form-field full-width">{{ form.categoria.label_tag }}{{ form.categoria }}</div>
+                <div class="form-field full-width">{{ form.conteudo.label_tag }}{{ form.conteudo }}</div>
+                <div class="form-field full-width">{{ form.tags.label_tag }}{{ form.tags }}</div>
+                <div class="form-field full-width">{{ form.video_url.label_tag }}{{ form.video_url }}</div>
+                <div class="form-field full-width">{{ form.gif_url.label_tag }}{{ form.gif_url }}</div>
+            </div>
+            <div class="profile-actions">
+                <a href="{% url 'post_detail' pk=post.pk %}" class="button button-ghost">Cancelar</a>
+                <button type="submit" class="button button-primary">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

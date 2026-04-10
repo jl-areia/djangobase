@@ -13,10 +13,13 @@ admin_site = CustomAdminSite(name='custom_admin')
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'categoria', 'criado_em')
+    list_display = ('titulo', 'autor', 'categoria', 'criado_em')
     search_fields = ('titulo', 'conteudo')
-    list_filter = ('categoria', 'criado_em')
+    list_filter = ('categoria', 'criado_em', 'autor')
     filter_horizontal = ('tags',)
+    autocomplete_fields = ('autor', 'categoria', 'tags')
+    fields = ('titulo', 'conteudo', 'autor', 'categoria', 'tags', 'video_url', 'gif_url', 'visualizacoes', 'criado_em')
+    readonly_fields = ('visualizacoes', 'criado_em')
 
     class Media:
         css = {
@@ -27,6 +30,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ('nome',)
+    search_fields = ('nome',)
 
     class Media:
         css = {
@@ -37,6 +41,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('nome',)
+    search_fields = ('nome',)
 
     class Media:
         css = {

@@ -1,5 +1,8 @@
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from .forms import PostForm
 from .models import Comment, Post, Categoria, Reaction, Tag
 
 
@@ -30,6 +33,26 @@ def criar_post(request):
     return render(request, 'blog/criar.html', {
         'categorias': categorias,
         'tags': tags
+    })
+
+
+@login_required
+def editar_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if post.autor != request.user and not request.user.is_superuser:
+        raise Http404
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'blog/editar.html', {
+        'form': form,
+        'post': post,
     })
 
 
