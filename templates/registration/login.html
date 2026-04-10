@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel auth-panel">
+    <div class="section-header">
+        <p class="eyebrow">Login</p>
+        <h2>Entre na sua conta</h2>
+        <p>Use seu usuário e senha para acessar o painel do FuturoSite.</p>
+    </div>
+
+    <div class="auth-card">
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button button-primary">Entrar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

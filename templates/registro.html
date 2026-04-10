@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel auth-panel">
+    <div class="section-header">
+        <p class="eyebrow">Cadastro</p>
+        <h2>Crie sua conta</h2>
+        <p>Faça seu registro rápido no FuturoSite. Somente o básico é necessário.</p>
+    </div>
+
+    <div class="auth-card">
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="button button-primary">Cadastrar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

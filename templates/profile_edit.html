@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Perfil - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel auth-panel">
+    <div class="section-header">
+        <p class="eyebrow">Editar Perfil</p>
+        <h2>Atualize suas informações</h2>
+        <p>Modifique seu nome, e-mail e adicione uma imagem de perfil por URL.</p>
+    </div>
+
+    <div class="auth-card profile-card">
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-field">{{ user_form.first_name.label_tag }}{{ user_form.first_name }}</div>
+                <div class="form-field">{{ user_form.last_name.label_tag }}{{ user_form.last_name }}</div>
+                <div class="form-field full-width">{{ user_form.email.label_tag }}{{ user_form.email }}</div>
+                <div class="form-field full-width">{{ profile_form.photo_url.label_tag }}{{ profile_form.photo_url }}</div>
+            </div>
+            <div class="profile-actions">
+                <a href="{% url 'perfil' %}" class="button button-ghost">Voltar ao perfil</a>
+                <button type="submit" class="button button-primary">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil - FuturoSite{% endblock %}
+
+{% block content %}
+<section class="page-panel profile-panel">
+    <div class="section-header">
+        <p class="eyebrow">Perfil</p>
+        <h2>Bem-vindo, {{ usuario.first_name|default:usuario.username }}</h2>
+        <p>Esta é a sua área pessoal. Aqui você encontra suas informações e controle de sessão.</p>
+    </div>
+
+    <div class="profile-layout">
+        <div class="profile-summary auth-card">
+            <div class="profile-header">
+                {% if profile.photo_url %}
+                    <img src="{{ profile.photo_url }}" alt="Avatar de {{ usuario.username }}" class="profile-photo">
+                {% else %}
+                    <div class="profile-avatar">{{ usuario.first_name|default:usuario.username|slice:":1"|upper }}</div>
+                {% endif %}
+                <div>
+                    <h3>{{ usuario.get_full_name|default:usuario.username }}</h3>
+                    <p class="profile-role">Usuário autenticado</p>
+                </div>
+            </div>
+
+            <div class="profile-details">
+                <div class="profile-detail-row">
+                    <span class="detail-label">Nome</span>
+                    <strong>{{ usuario.get_full_name|default:'Não definido' }}</strong>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">Usuário</span>
+                    <strong>{{ usuario.username }}</strong>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">E-mail</span>
+                    <strong>{{ usuario.email|default:'Sem e-mail cadastrado' }}</strong>
+                </div>
+                <div class="profile-detail-row">
+                    <span class="detail-label">Registrado em</span>
+                    <strong>{{ usuario.date_joined|date:'d/m/Y H:i' }}</strong>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <a href="{% url 'editar_perfil' %}" class="button button-ghost">Editar perfil</a>
+                <form method="POST" action="{% url 'logout' %}" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="button button-primary">Sair</button>
+                </form>
+            </div>
+        </div>
+
+        <aside class="profile-stats">
+            <div class="stat-card">
+                <span class="stat-title">Posts criados</span>
+                <strong>{{ posts_criados }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-title">Posts comentados</span>
+                <strong>{{ posts_comentados }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-title">Reações</span>
+                <strong>{{ posts_reagidos }}</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-title">Visitas totais</span>
+                <strong>{{ visitas_totais }}</strong>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}
